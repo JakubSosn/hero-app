@@ -1,59 +1,42 @@
 import * as React from "react";
-import CheckboxRow from "./CheckboxRow";
+import { CustomForm } from "./CheckboxRowStyles";
 import { StyledHeading } from "./CheckboxStyles";
 import { CustomFormGroup } from "./CheckboxStyles";
+import Checkbox from "@mui/material/Checkbox";
 
-// data to test did map function works
-// const dataStatus = ["New", "In processing", "Dropped out", "Hired"];
-// const dataStage = ["New", "In processing", "Dropped out", "Hired"];
+interface CheckboxValue {
+  header: string;
+  checkbox: any;
+  dispatch: React.Dispatch<any>;
+}
 
-const data = {
-  status: {
-    label: "Status",
-    data: ["New", "In processing", "Dropped out", "Hired"],
-  },
-  stage: {
-    label: "Stage",
-    data: [
-      "Evaluation",
-      "Interview",
-      "Phone interview",
-      "Tech interview",
-      "Offer",
-    ],
-  },
-};
-
-const CheckboxFilters = () => {
-  const [checked, setChecked] = React.useState(false);
-
-  const handleOnClick = (value: boolean) => {
-    setChecked(value);
-    // go to parent
+const CheckboxFilters: React.FunctionComponent<CheckboxValue> = ({
+  header,
+  checkbox,
+  dispatch,
+}) => {
+  const handleOnClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(event.currentTarget.id);
   };
 
-  const listOfStatus = data.status.data.map((value: string) => (
-    <CheckboxRow
-      isChecked={checked}
-      handleOnClick={handleOnClick}
-      label={value}
-    />
-  ));
-
-  const listOfStage = data.stage.data.map((value: string) => (
-    <CheckboxRow
-      isChecked={checked}
-      handleOnClick={handleOnClick}
-      label={value}
+  const listOfCheckbox = checkbox.map((item: any) => (
+    <CustomForm
+      key={item.id}
+      control={
+        <Checkbox
+          id={item.id}
+          checked={item.isChecked}
+          onChange={handleOnClick}
+        />
+      }
+      label={item.title}
     />
   ));
 
   return (
     <CustomFormGroup>
-      <StyledHeading>{data.status.label}</StyledHeading>
-      {listOfStatus}
-      <StyledHeading>{data.stage.label}</StyledHeading>
-      {listOfStage}
+      <StyledHeading>{header}</StyledHeading>
+      {listOfCheckbox}
     </CustomFormGroup>
   );
 };

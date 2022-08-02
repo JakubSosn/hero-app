@@ -1,12 +1,12 @@
-
+import React from "react";
 import { FunctionComponent, useState } from "react";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { CustomForm } from "./CheckboxRowStyles";
 
 interface CheckboxRowProps {
   label: string;
   isChecked: boolean;
-  handleOnClick: (value: boolean) => void;
+  handleOnClick: (value: any) => void;
 }
 
 const CheckboxRow: FunctionComponent<CheckboxRowProps> = ({
@@ -17,13 +17,17 @@ const CheckboxRow: FunctionComponent<CheckboxRowProps> = ({
   const [checkboxValue, setCheckboxValue] = useState(isChecked);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckboxValue(event.target.checked);
-    handleOnClick(event.target.checked);
+    handleOnClick(event.target.value);
+    console.log("click");
   };
+  // const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setCheckboxValue(event.target.checked);
+  //   handleOnClick(event.target.checked);
+  // };
 
   return (
-    <FormControlLabel
-      control={<Checkbox checked={checkboxValue} onChange={handleOnChange} />}
+    <CustomForm
+      control={<Checkbox checked={isChecked} onChange={handleOnChange} />}
       label={label}
     />
   );
