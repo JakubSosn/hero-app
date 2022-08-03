@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 type CandidatePost = {
   status?: string[];
@@ -18,18 +18,18 @@ type CandidatePost = {
 };
 
 type CandidateEdit = {
-  name?: "string";
-  lastName?: "string";
-  email?: "string";
+  name?: 'string';
+  lastName?: 'string';
+  email?: 'string';
   availableFrom?: Date;
   expectedMonthlySalary?: number;
-  otherExpectations?: "string";
-  cvPath?: "string";
+  otherExpectations?: 'string';
+  cvPath?: 'string';
   recruitmentId?: number;
 };
 
 const client = axios.create({
-  baseURL: "https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/",
+  baseURL: 'https://swh-t-praktyki2022-app.azurewebsites.net/Candidate/',
   withCredentials: true,
 });
 

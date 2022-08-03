@@ -1,13 +1,15 @@
-import React, { useEffect, useReducer, useState } from "react";
-import CheckboxFilters from "../common/components/checkboxFilters/CheckboxFilters";
-import { CustomDiv, CheckboxDiv } from "./CandidatesStyles";
-import CandidatesTableHeader from "./headerCandidates/HeaderCandidates";
-import { useTables } from "../contexts/CandidatesTablesContext";
-import { CustomKanbanDiv } from "../common/components/kanban/KanbanTableStyles";
-import KanbanTable from "../common/components/kanban/KanbanTable";
-import CandidatesService from "../common/Api/Candidates.service";
-import { CustomTable } from "./table/CustomTable";
-import { useSearchParams } from "react-router-dom";
+import React, { useEffect, useReducer, useState } from 'react';
+import CheckboxFilters from '../common/components/checkboxFilters/CheckboxFilters';
+import { CustomDiv, CheckboxDiv } from './CandidatesStyles';
+import CandidatesTableHeader from './headerCandidates/HeaderCandidates';
+import { useTables } from '../contexts/CandidatesTablesContext';
+// import { CustomKanbanDiv } from "../common/components/kanban/KanbanTableStyles";
+// import KanbanTable from "../common/components/kanban/KanbanTable";
+import CandidatesService from '../common/Api/Candidates.service';
+import { CustomTable } from './table/CustomTable';
+import { useSearchParams } from 'react-router-dom';
+import { CustomKanbanDiv } from './canbanTable/KanbanTableStyles';
+import KanbanTable from './canbanTable/KanbanTable';
 
 interface Candidates {
   id: number;
@@ -24,8 +26,8 @@ interface Candidates {
 
 function Candidates() {
   const [searchParams] = useSearchParams();
-  const id = searchParams.get("id") || undefined;
-  const status = searchParams.get("status") || undefined;
+  const id = searchParams.get('id') || undefined;
+  const status = searchParams.get('status') || undefined;
 
   console.log(searchParams);
 
@@ -47,62 +49,62 @@ function Candidates() {
 
   type Action = {
     id: number;
-    type: "IsChecked";
+    type: 'IsChecked';
   };
 
   const initialCheckboxStatus: CheckboxList[] = [
     {
       id: 1,
-      title: "New",
+      title: 'New',
       isChecked: true,
     },
     {
       id: 2,
-      title: "In Processing",
+      title: 'In Processing',
       isChecked: true,
     },
     {
       id: 3,
-      title: "Dropped out",
+      title: 'Dropped out',
       isChecked: true,
     },
     {
       id: 4,
-      title: "Hired",
+      title: 'Hired',
       isChecked: true,
     },
   ];
   const initialCheckboxStage: CheckboxList[] = [
     {
       id: 1,
-      title: "Evaluation",
+      title: 'Evaluation',
       isChecked: true,
     },
     {
       id: 2,
-      title: "Interview",
+      title: 'Interview',
       isChecked: true,
     },
     {
       id: 3,
-      title: "Phone interview",
+      title: 'Phone interview',
       isChecked: true,
     },
     {
       id: 4,
-      title: "Tech  interview",
+      title: 'Tech  interview',
       isChecked: true,
     },
     {
       id: 5,
-      title: "Offer",
+      title: 'Offer',
       isChecked: true,
     },
   ];
 
   const reducer = (state: CheckboxList[], action: Action) => {
     switch (action.type) {
-      case "IsChecked":
+      case 'IsChecked':
         return state.map((checked: CheckboxList) => {
           if (checked.id == action.id) {
             return { ...checked, isChecked: !checked.isChecked };
@@ -116,21 +118,16 @@ function Candidates() {
   };
 
   const handleComplete = (checkbox: any) => {
-    dispatch({ type: "IsChecked", id: checkbox });
+    dispatch({ type: 'IsChecked', id: checkbox });
   };
   const handleCompleteStage = (checkbox: any) => {
-    dispatchStage({ type: "IsChecked", id: checkbox });
+    dispatchStage({ type: 'IsChecked', id: checkbox });
   };
 
   const [checkboxStatus, dispatch] = useReducer(reducer, initialCheckboxStatus);
-  const [checkboxStage, dispatchStage] = useReducer(
-    reducer,
-    initialCheckboxStage
-  );
+  const [checkboxStage, dispatchStage] = useReducer(reducer, initialCheckboxStage);
 
-  const [candidateInfoForListDTOs, setcandidateInfoForListDTOs] = useState<
-    Candidates[]
-  >([]);
+  const [candidateInfoForListDTOs, setcandidateInfoForListDTOs] = useState<Candidates[]>([]);
   const whichTable = useTables().value;
 
   const candidateData = async (projectId?: string, status?: string) => {
@@ -148,10 +145,7 @@ function Candidates() {
     if (status) {
       postData.status = [status];
     }
-    const responseData = await CandidatesService.candidateHttpPost(
-      "GetList",
-      postData
-    );
+    const responseData = await CandidatesService.candidateHttpPost('GetList', postData);
     setcandidateInfoForListDTOs(responseData.data.candidateInfoForListDTOs);
   };
 
@@ -197,25 +191,17 @@ function Candidates() {
           {whichTable === 0 ? (
             <>
               <CheckboxDiv>
-                <CheckboxFilters
-                  header="Status"
-                  checkbox={checkboxStatus}
-                  dispatch={handleComplete}
-                />
-                <CheckboxFilters
-                  header="Stage"
-                  checkbox={checkboxStage}
-                  dispatch={handleCompleteStage}
-                />
+                <CheckboxFilters header='Status' checkbox={checkboxStatus} dispatch={handleComplete} />
+                <CheckboxFilters header='Stage' checkbox={checkboxStage} dispatch={handleCompleteStage} />
               </CheckboxDiv>
-              <div style={{ width: "100%" }}>
-                <CandidatesTableHeader title="Candidates" />
+              <div style={{ width: '100%' }}>
+                <CandidatesTableHeader title='Candidates' />
                 <CustomTable candidateList={candidateInfoForListDTOs} />
               </div>
             </>
           ) : (
-            <div style={{ width: "100%" }}>
-              <CandidatesTableHeader title="Candidates" />
+            <div style={{ width: '100%' }}>
+              <CandidatesTableHeader title='Candidates' />
               <CustomKanbanDiv>
                 <KanbanTable />
               </CustomKanbanDiv>
