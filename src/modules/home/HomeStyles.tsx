@@ -1,14 +1,17 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import MyCalendar from './homeCalendar/MyCalendar';
 
 export const StyledBox = styled(Box)`
   display: flex;
-  justify-content: flex-start;
-  padding-bottom: 15px;
+  flex-direction: column;
+  & > div {
+    margin: 0px 15px 15px 0px;
+  }
 `;
 
 export const MainBox = styled(Box)`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  min-width: calc(100% - 66px);
 `;

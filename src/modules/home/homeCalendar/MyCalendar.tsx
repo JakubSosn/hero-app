@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-import eventsList from "./eventsList";
+import React, { useState } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import Events from '../../common/mocks/Events.json';
 
 const localizer = momentLocalizer(moment);
 
@@ -35,13 +35,13 @@ const MyCalendar = () => (
   //   const data = await InterviewService.interviewHttpPost("GetList", postData);
   //   setInterview(data.data);
   // };
-  <div className="myCustomHeight">
+  <div className='myCustomHeight'>
     <Calendar
       localizer={localizer}
-      events={eventsList}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 600 }}
+      events={Events}
+      startAccessor='start'
+      endAccessor='end'
+      style={{ height: 600, width: 1000 }}
     />
   </div>
 );
