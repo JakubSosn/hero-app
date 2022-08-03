@@ -1,8 +1,11 @@
 import axios from "axios";
 
-type CandidatePost = {
-  status?: string[];
-  stage?: string[];
+type InterviewPost = {
+  formData?: string;
+  toData?: string;
+  candidateId?: number;
+  workerId?: number;
+  type?: string;
   paging: {
     pageSize: number;
     pageNumber: number;
@@ -17,17 +20,6 @@ type CandidatePost = {
   };
 };
 
-type CandidateEdit = {
-  name?: "string";
-  lastName?: "string";
-  email?: "string";
-  availableFrom?: Date;
-  expectedMonthlySalary?: number;
-  otherExpectations?: "string";
-  cvPath?: "string";
-  recruitmentId?: number;
-};
-
 const client = axios.create({
   baseURL: "https://swh-t-praktyki2022-app.azurewebsites.net/Interview/",
   withCredentials: true,
@@ -37,11 +29,11 @@ const candidateHttpGet = (endpoint: string) => {
   return client.get(`${endpoint}`);
 };
 
-const interviewHttpPost = (endpoint: string, postData: CandidatePost) => {
+const interviewHttpPost = (endpoint: string, postData: InterviewPost) => {
   return client.post(`${endpoint}`, postData);
 };
 
-const candidateHttpPut = (endpoint: string, postData: CandidateEdit) => {
+const candidateHttpPut = (endpoint: string, postData: InterviewPost) => {
   return client.put(`${endpoint}`, postData);
 };
 
