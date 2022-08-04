@@ -40,6 +40,7 @@ const interviewList = async () => {
 
   const getInterview = async () => {
     const data = await InterviewService.interviewHttpPost("GetList", postData);
+
     setInterview(data.data.interviewDTOs);
   };
 
