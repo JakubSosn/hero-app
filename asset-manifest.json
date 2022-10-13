@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/hero-app/static/css/main.21382ab4.css",
-    "main.js": "/hero-app/static/js/main.3007ecd6.js",
+    "main.js": "/hero-app/static/js/main.17deb3dc.js",
     "static/js/787.c593b322.chunk.js": "/hero-app/static/js/787.c593b322.chunk.js",
     "index.html": "/hero-app/index.html",
     "main.21382ab4.css.map": "/hero-app/static/css/main.21382ab4.css.map",
-    "main.3007ecd6.js.map": "/hero-app/static/js/main.3007ecd6.js.map",
+    "main.17deb3dc.js.map": "/hero-app/static/js/main.17deb3dc.js.map",
     "787.c593b322.chunk.js.map": "/hero-app/static/js/787.c593b322.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.21382ab4.css",
-    "static/js/main.3007ecd6.js"
+    "static/js/main.17deb3dc.js"
   ]
 }
