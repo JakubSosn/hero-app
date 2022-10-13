@@ -15,7 +15,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="signin" element={<SignIn />} />
-          <Route path="/" element={<Wrapper />}>
+          <Route path="/hero-app" element={<Wrapper />}>
             <Route index element={<Home />} />
             <Route path="candidates/" element={<Candidates />} />
             <Route path="candidates/:id?/:status" element={<Candidates />} />
